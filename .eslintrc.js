@@ -1,3 +1,4 @@
+module.exports =
 {
   "parser": "@typescript-eslint/parser",
   "env": {
@@ -22,4 +23,4 @@
     "no-param-reassign": ["error", { "props": false } ],
     "max-len": 1
   }
-}
+};
