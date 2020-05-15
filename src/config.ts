@@ -4,9 +4,6 @@ const parsed = dotenv.config().parsed;
 
 const solaxURL = parsed.solax_url;
 
-const serverPort =  8080;
+const serverPort = 8080;
 
-export {
-  solaxURL,
-  serverPort
-}
+export { solaxURL, serverPort };

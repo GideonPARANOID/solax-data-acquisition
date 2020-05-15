@@ -3,5 +3,5 @@ export type RealTimeAPI = {
   SN: string;
   ver: string;
   Data: number[];
-  Information: (string|number)[]
-}
+  Information: (string | number)[];
+};
