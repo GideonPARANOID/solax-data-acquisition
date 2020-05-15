@@ -7,3 +7,4 @@ date=`date +%s`
 
 echo $total
 echo "$date,$total" >> log.csv
+wc -l log.csv
