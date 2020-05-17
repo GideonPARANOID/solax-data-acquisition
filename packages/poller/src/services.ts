@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { RealTimeAPI } from './types';
+import { RealTimeAPI, RealTimeData, UsefulRealTimeData } from './types';
 import * as config from './config';
 
 const unmarshallRealTimeData = ({
@@ -8,7 +8,7 @@ const unmarshallRealTimeData = ({
   Information: info,
   ver,
   type,
-}: RealTimeAPI) => ({
+}: RealTimeAPI): RealTimeData => ({
   pv: [
     {
       current: data[0],
@@ -54,7 +54,7 @@ const unmarshallRealTimeData = ({
   meta: {
     type,
     version: ver,
-    systemMax: info[6],
+    systemMax: Number(info[6]),
   },
   units: {
     current: { name: 'Amperes', short: 'A' },
@@ -65,10 +65,22 @@ const unmarshallRealTimeData = ({
 });
 
 export const getRealTimeData = async () => {
-  console.log('a', config);
+  console.log(`${config.solaxURL}/?optType=ReadRealTimeData`);
   const { data }: AxiosResponse<RealTimeAPI> = await axios.post(
     `${config.solaxURL}/?optType=ReadRealTimeData`
   );
 
+  console.log(data);
+
   return unmarshallRealTimeData(data);
 };
+
+export const getUsefulData = ({
+  pv,
+  solar,
+  temperature,
+}: RealTimeData): UsefulRealTimeData => ({
+  pv: pv[0],
+  solar,
+  temperature,
+});
