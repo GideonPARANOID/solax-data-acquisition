@@ -1,14 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { RealTimeAPI, RealTimeData, UsefulRealTimeData } from './types';
+import { RTAPI, RTData, UsefulRTData } from './types';
 import * as config from './config';
 
-const unmarshallRealTimeData = ({
-  Data: data,
-  Information: info,
-  ver,
-  type,
-}: RealTimeAPI): RealTimeData => ({
+const unmarshallRTData = (
+  { Data: data, Information: info, ver, type }: RTAPI,
+  date: number
+): RTData => ({
   pv: [
     {
       current: data[0],
@@ -62,25 +60,26 @@ const unmarshallRealTimeData = ({
     voltage: { name: 'Volts', short: 'V' },
     frequency: { name: 'Hertz', short: 'Hz' },
   },
+  date,
 });
 
-export const getRealTimeData = async () => {
-  console.log(`${config.solaxURL}/?optType=ReadRealTimeData`);
-  const { data }: AxiosResponse<RealTimeAPI> = await axios.post(
-    `${config.solaxURL}/?optType=ReadRealTimeData`
+export const getRTData = async () => {
+  const date = Date.now();
+  const { data }: AxiosResponse<RTAPI> = await axios.post(
+    `${config.solaxURL}/?optType=ReadRTData`
   );
 
-  console.log(data);
-
-  return unmarshallRealTimeData(data);
+  return unmarshallRTData(data, date);
 };
 
 export const getUsefulData = ({
   pv,
   solar,
   temperature,
-}: RealTimeData): UsefulRealTimeData => ({
+  date,
+}: RTData): UsefulRTData => ({
   pv: pv[0],
   solar,
   temperature,
+  date,
 });

@@ -1,4 +1,4 @@
-export type RealTimeAPI = {
+export type RTAPI = {
   type: string;
   SN: string;
   ver: string;
@@ -6,7 +6,7 @@ export type RealTimeAPI = {
   Information: (string | number)[];
 };
 
-type RealTimeDataEntity = {
+type RTDataEntity = {
   current: number;
   voltage: number;
   power: number;
@@ -17,14 +17,15 @@ type UnitDescription = {
   short: string;
 };
 
-export type RealTimeData = {
-  pv: RealTimeDataEntity[];
-  grid: RealTimeDataEntity & {
+export type RTData = {
+  date: number;
+  pv: RTDataEntity[];
+  grid: RTDataEntity & {
     frequency: number;
     energyTo: number;
     energyFrom: number;
   };
-  battery: RealTimeDataEntity & {
+  battery: RTDataEntity & {
     temperature: number;
     capacity: number;
   };
@@ -56,8 +57,23 @@ export type RealTimeData = {
   };
 };
 
-export type UsefulRealTimeData = {
-  pv: RealTimeDataEntity;
-  solar: RealTimeData['solar'];
-  temperature: RealTimeData['temperature'];
+export type UsefulRTData = {
+  date: number;
+  pv: RTDataEntity;
+  solar: RTData['solar'];
+  temperature: RTData['temperature'];
+};
+
+export type Record = {
+  date: number;
+  value: number;
+};
+
+export type UsefulDailyData = {
+  date: number;
+  total: number;
+  max: {
+    minute: Record;
+    hour: Record;
+  };
 };

@@ -2,6 +2,7 @@ import Agenda from 'agenda';
 import { MongoClient } from 'mongodb';
 
 import * as config from './config';
+import { SolaxDb } from './db';
 import { poll, generateDailyTotal } from './agenda-items';
 
 (async () => {
@@ -10,12 +11,15 @@ import { poll, generateDailyTotal } from './agenda-items';
 
   const client = await new MongoClient(config.db.url).connect();
 
-  const db = client.db(config.db.name);
+  const db = new SolaxDb(client.db(config.db.name));
 
   agenda.define('poll', poll(db));
-  agenda.define('generateDailyTotal', generateDailyTotal());
+  agenda.define('generateDailyTotal', generateDailyTotal(db));
 
-  await agenda.start();
-  await agenda.every('1 minute', 'poll');
-  await agenda.every('1 day', 'generateDailyTotal');
+  await generateDailyTotal(db)();
+
+  // await agenda.every('* * * * *', 'poll'); // every min
+  // await agenda.every('0 0 * * *', 'generateDailyTotal'); // every day at midnight
+
+  // await agenda.start();
 })();

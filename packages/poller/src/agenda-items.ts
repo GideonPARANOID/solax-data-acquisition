@@ -1,21 +1,22 @@
-import { Db } from 'mongodb';
+import { SolaxDb } from './db';
+import { getUsefulData, getRTData } from './services';
 
-import { getUsefulData, getRealTimeData } from './services';
+export const poll = (solaxDb: SolaxDb) => async () => {
+  const date = new Date();
+  console.log(`poll ${date.toISOString()}`);
 
-export const poll = (db: Db) => async () => {
-  const date = Date.now();
-  console.log('poll', date);
-
-  const data = getUsefulData(await getRealTimeData());
-
-  const collectionName = 'feed';
+  const data = getUsefulData(await getRTData());
 
   console.log('poll.data', data);
 
-  await db.collection(collectionName).insertOne({ date, data });
+  solaxDb.addMinutely(data);
 };
 
-export const generateDailyTotal = () => () => {
-  const date = Date.now();
-  console.log('generateDailyTotal', date);
+export const generateDailyTotal = (solaxDb: SolaxDb) => async () => {
+  const date = new Date();
+  console.log(`generateDailyTotal ${date.toISOString()}`);
+
+  const minutely = await solaxDb.getMinutelyForDay(date);
+
+  console.log(minutely);
 };
