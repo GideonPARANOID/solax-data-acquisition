@@ -1,6 +1,6 @@
 import { Db } from 'mongodb';
 
-import { UsefulRTData, UsefulDailyData } from './types';
+import { UsefulRTData, UsefulDailyData } from '@types';
 
 export class SolaxDb {
   private db: Db;

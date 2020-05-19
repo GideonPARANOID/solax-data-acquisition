@@ -1,4 +1,4 @@
-import { UsefulRTData, Record } from './types';
+import { UsefulRTData, Record } from '@types';
 
 export const calcDailyStats = (
   dailyDate: number,
