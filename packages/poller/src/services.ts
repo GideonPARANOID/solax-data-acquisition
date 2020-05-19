@@ -66,7 +66,7 @@ const unmarshallRTData = (
 export const getRTData = async () => {
   const date = Date.now();
   const { data }: AxiosResponse<RTAPI> = await axios.post(
-    `${config.solaxURL}/?optType=ReadRTData`
+    `${config.solaxURL}/?optType=ReadRealTimeData`
   );
 
   return unmarshallRTData(data, date);

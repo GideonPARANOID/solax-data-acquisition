@@ -16,10 +16,8 @@ import { poll, generateDailyTotal } from './agenda-items';
   agenda.define('poll', poll(db));
   agenda.define('generateDailyTotal', generateDailyTotal(db));
 
-  await generateDailyTotal(db)();
-
-  // await agenda.every('* * * * *', 'poll'); // every min
+  await agenda.every('* * * * *', 'poll'); // every min
   // await agenda.every('0 0 * * *', 'generateDailyTotal'); // every day at midnight
 
-  // await agenda.start();
+  await agenda.start();
 })();
