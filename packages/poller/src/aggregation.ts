@@ -1,15 +1,18 @@
 import { UsefulRTData, Record } from './types';
 
-export const getDailyTotals = (minutelyData: UsefulRTData[]) => {
+export const calcDailyStats = (
+  dailyDate: number,
+  minutelyData: UsefulRTData[]
+) => {
   const getSumPvPower = (data: UsefulRTData[]) =>
     data.reduce((sum, { pv }: UsefulRTData): number => sum + pv.power / 60, 0);
 
   const total = getSumPvPower(minutelyData);
 
   const minute = minutelyData.reduce(
-    (max: number, { pv }: UsefulRTData): number =>
-      pv.power > max ? pv.power : max,
-    0
+    (max: Record, { date, pv }: UsefulRTData): Record =>
+      pv.power > max.value ? { date, value: pv.power } : max,
+    { date: 0, value: 0 }
   );
 
   // sliding window total
@@ -28,5 +31,5 @@ export const getDailyTotals = (minutelyData: UsefulRTData[]) => {
       { date: 0, value: 0 }
     );
 
-  return { total, max: { minute, hour } };
+  return { date: dailyDate, total, max: { minute, hour } };
 };

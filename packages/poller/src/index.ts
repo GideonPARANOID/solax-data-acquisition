@@ -3,7 +3,7 @@ import { MongoClient } from 'mongodb';
 
 import * as config from './config';
 import { SolaxDb } from './db';
-import { poll, generateDailyTotal } from './agenda-items';
+import { pollMinutely, generateDailyStats } from './agenda-items';
 
 (async () => {
   console.log('app', config);
@@ -13,11 +13,11 @@ import { poll, generateDailyTotal } from './agenda-items';
 
   const db = new SolaxDb(client.db(config.db.name));
 
-  agenda.define('poll', poll(db));
-  agenda.define('generateDailyTotal', generateDailyTotal(db));
+  agenda.define('pollMinutely', pollMinutely(db));
+  agenda.define('generateDailyStats', generateDailyStats(db));
 
-  await agenda.every('* * * * *', 'poll'); // every min
-  // await agenda.every('0 0 * * *', 'generateDailyTotal'); // every day at midnight
+  await agenda.every('* * * * *', 'pollMinutely'); // every min
+  await agenda.every('0 0 * * *', 'generateDailyStats'); // every day at midnight
 
   await agenda.start();
 })();
