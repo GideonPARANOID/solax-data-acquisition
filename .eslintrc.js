@@ -13,6 +13,12 @@ module.exports =
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
+  "settings": {
+      "import/resolver": {
+            "typescript": {} // this loads <rootdir>/tsconfig.json to eslint
+          }
+
+    },
   "rules": {
     "@typescript-eslint/no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
     "import/extensions": 0,

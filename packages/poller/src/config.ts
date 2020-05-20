@@ -1,17 +1,7 @@
-import * as dotenv from 'dotenv';
-
-const parsed = dotenv.config().parsed;
-
-const solaxURL = parsed.solax_url;
+import { solaxURL, db } from 'solax-common/config';
 
 const agendaDb = {
-  url: parsed.db_url,
-};
-
-const db = {
-  url: parsed.db_url,
-  name: 'solax',
-  collection: 'feed',
+  url: db.url,
 };
 
 export { solaxURL, agendaDb, db };

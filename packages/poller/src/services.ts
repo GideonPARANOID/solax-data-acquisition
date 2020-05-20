@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { RTAPI, RTData, UsefulRTData } from '@types';
+import { RTAPI, RTData, UsefulRTData } from 'solax-common/types';
 import * as config from './config';
 
 const unmarshallRTData = (

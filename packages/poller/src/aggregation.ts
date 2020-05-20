@@ -1,4 +1,4 @@
-import { UsefulRTData, Record } from '@types';
+import { UsefulRTData, Record } from 'solax-common/types';
 
 export const calcDailyStats = (
   dailyDate: number,
