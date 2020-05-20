@@ -97,10 +97,18 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.2.tgz#857a118d8634c84bba7ae14088e4508490cd5da5"
   integrity sha512-4kPlzbljFcsttWEq6aBW0OZe6BDajAmyvr2xknBG92tejQnvdGtT9+kXSZ580DqpxY9qG2xeQVF9Dq0ymUTo5Q==
 
-"@types/mongodb@*", "@types/mongodb@^3.5.17":
+"@types/mongodb@*":
   version "3.5.17"
   resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.5.17.tgz#ada9f38076fb6182b23293af029afb83f4dc8c3d"
   integrity sha512-pxpy5MIaEZ4Hmc8ijwVXCGYkWgs6w22whNwHmivbNi6NHWMxlR+QzIGeVGTCqfRcJKO6FuaJOYJ4vnYvz/VXAQ==
+  dependencies:
+    "@types/bson" "*"
+    "@types/node" "*"
+
+"@types/mongodb@^3.5.18":
+  version "3.5.18"
+  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.5.18.tgz#79b1b8119e035980a4b4412239e0d05b367ec647"
+  integrity sha512-fEmnRmwXt4pEFhqWB/ZlyNaDhLfQv5GALaZAlH9Pb0kEttvsCr66umJ9pfBEEP3ks1hjlwAuMtqk/+DyZDLAXQ==
   dependencies:
     "@types/bson" "*"
     "@types/node" "*"

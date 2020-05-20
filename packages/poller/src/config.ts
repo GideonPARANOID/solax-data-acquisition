@@ -4,4 +4,4 @@ const agendaDb = {
   url: db.url,
 };
 
-export { solaxURL, agendaDb, db };
+export { agendaDb, db, solaxURL };

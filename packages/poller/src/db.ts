@@ -1,20 +1,7 @@
-import { Db } from 'mongodb';
-
+import { SolaxDb } from 'solax-common/solax-db';
 import { UsefulRTData, UsefulDailyData } from 'solax-common/types';
 
-export class SolaxDb {
-  private db: Db;
-
-  collections = {
-    minutely: 'minutely',
-    daily: 'daily',
-    records: 'records',
-  };
-
-  constructor(db: Db) {
-    this.db = db;
-  }
-
+export class PollerDb extends SolaxDb {
   async addMinutely(data: UsefulRTData): Promise<void> {
     await this.db.collection(this.collections.minutely).insertOne(data);
   }

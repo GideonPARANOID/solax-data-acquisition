@@ -2,7 +2,7 @@ import Agenda from 'agenda';
 import { MongoClient } from 'mongodb';
 
 import * as config from './config';
-import { SolaxDb } from './db';
+import { PollerDb } from './db';
 import { pollMinutely, generateDailyStats } from './agenda-items';
 
 (async () => {
@@ -10,8 +10,7 @@ import { pollMinutely, generateDailyStats } from './agenda-items';
   const agenda = new Agenda({ db: { address: config.agendaDb.url } });
 
   const client = await new MongoClient(config.db.url).connect();
-
-  const db = new SolaxDb(client.db(config.db.name));
+  const db = new PollerDb(client.db(config.db.name));
 
   agenda.define('pollMinutely', pollMinutely(db));
   agenda.define('generateDailyStats', generateDailyStats(db));
