@@ -8,6 +8,8 @@ export const pollMinutely = (pollerDb: PollerDb) => async () => {
 
   const data = getUsefulData(await getRTData());
 
+  data.date = new Date(data.date).setSeconds(0, 0);
+
   console.log('poll.data', data);
 
   pollerDb.addMinutely(data);
