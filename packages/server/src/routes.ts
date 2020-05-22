@@ -1,18 +1,20 @@
-import { Express } from 'express';
+import { Express, Request, Response } from 'express';
+
+import { getRTData } from 'solax-common/services';
 
 import { ServerDb } from './db';
-import { getRealTimeData } from './services';
 
 export const current = (app: Express) =>
-  app.get('/current', async (req, res) => {
-    const data = await getRealTimeData();
-
-    res.send(data);
-  });
+  app.get('/current', async (req: Request, res: Response) =>
+    res.send(await getRTData())
+  );
 
 export const thisMinute = (app: Express, db: ServerDb) =>
-  app.get('/this-minute', async (req, res) => {
-    const data = await db.getMinute();
+  app.get('/minute/now', async (req: Request, res: Response) =>
+    res.send(await db.getMinute())
+  );
 
-    res.send(data);
-  });
+export const allDays = (app: Express, db: ServerDb) =>
+  app.get('/day/all', async (req: Request, res: Response) =>
+    res.send(await db.getAllDays())
+  );

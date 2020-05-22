@@ -3,7 +3,7 @@ import { MongoClient } from 'mongodb';
 
 import * as config from './config';
 import { PollerDb } from './db';
-import { pollMinutely, generateDailyStats } from './agenda-items';
+import { pollMinutely, generateDayStats } from './agenda-items';
 
 (async () => {
   console.log('app', config);
@@ -13,10 +13,10 @@ import { pollMinutely, generateDailyStats } from './agenda-items';
   const db = new PollerDb(client.db(config.db.name));
 
   agenda.define('pollMinutely', pollMinutely(db));
-  agenda.define('generateDailyStats', generateDailyStats(db));
+  agenda.define('generateDayStats', generateDayStats(db));
 
   await agenda.every('* * * * *', 'pollMinutely'); // every min
-  await agenda.every('0 0 * * *', 'generateDailyStats'); // every day at midnight
+  await agenda.every('0 0 * * *', 'generateDayStats'); // every day at midnight
 
   await agenda.start();
 })();

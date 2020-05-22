@@ -1,12 +1,12 @@
 import { SolaxDb } from 'solax-common/solax-db';
-import { UsefulRTData, UsefulDailyData } from 'solax-common/types';
+import { MinuteStats, DayStats } from 'solax-common/types';
 
 export class PollerDb extends SolaxDb {
-  async addMinutely(data: UsefulRTData): Promise<void> {
-    await this.db.collection(this.collections.minutely).insertOne(data);
+  async addMinutely(data: MinuteStats): Promise<void> {
+    await this.db.collection(this.collections.minute).insertOne(data);
   }
 
-  async getMinutelyForDay(date: Date): Promise<UsefulRTData[]> {
+  async getMinutelyForDay(date: Date): Promise<MinuteStats[]> {
     const startDate = date.setHours(0, 0, 0, 0);
     const endDate = date.setHours(23, 59, 59, 999);
 
@@ -16,7 +16,7 @@ export class PollerDb extends SolaxDb {
       ).toISOString()}`
     );
 
-    const cursor = await this.db.collection(this.collections.minutely).find({
+    const cursor = await this.db.collection(this.collections.minute).find({
       date: {
         $gte: startDate,
         $lte: endDate,
@@ -26,7 +26,7 @@ export class PollerDb extends SolaxDb {
     return cursor.toArray();
   }
 
-  async addDaily(data: UsefulDailyData): Promise<void> {
-    await this.db.collection(this.collections.daily).insertOne(data);
+  async addDay(data: DayStats): Promise<void> {
+    await this.db.collection(this.collections.day).insertOne(data);
   }
 }

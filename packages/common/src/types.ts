@@ -17,7 +17,7 @@ type UnitDescription = {
   short: string;
 };
 
-export type RTData = {
+export type ParsedRT = {
   date: number;
   pv: RTDataEntity[];
   grid: RTDataEntity & {
@@ -57,11 +57,11 @@ export type RTData = {
   };
 };
 
-export type UsefulRTData = {
+export type MinuteStats = {
   date: number;
   pv: RTDataEntity;
-  solar: RTData['solar'];
-  temperature: RTData['temperature'];
+  solar: ParsedRT['solar'];
+  temperature: ParsedRT['temperature'];
 };
 
 export type Record = {
@@ -69,7 +69,7 @@ export type Record = {
   value: number;
 };
 
-export type UsefulDailyData = {
+export type DayStats = {
   date: number;
   total: number;
   max: {
