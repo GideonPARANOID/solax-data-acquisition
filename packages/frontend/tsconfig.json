@@ -3,21 +3,16 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "es6",
-    "noImplicitAny": true,
     "sourceMap": true,
     "jsx": "react",
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "*": [
-        "node_modules/*"
-      ]
+      "*": [ "node_modules/*" ],
+      "solax-common*": [ "../common/src*" ]
     }
   },
   "include": [
     "src/**/*"
-  ],
-  "exclude": [
-    "src/public"
   ]
 }
