@@ -1,14 +1,24 @@
 const path = require('path');
 
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
+
+const outPath = path.resolve(__dirname, 'dist');
 
 module.exports = {
   entry: './src/index.tsx',
   target: 'web',
-  mode: 'production',
   devtool: 'source-map',
   module: {
     rules: [
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+          },
+        ],
+      },
       {
         test: /\.ts(x?)$/,
         exclude: /node_modules/,
@@ -35,7 +45,18 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: outPath,
     libraryTarget: 'umd',
+  },
+  plugins: [
+    new HtmlPlugin({
+      template: './src/index.html',
+      filename: './index.html',
+    }),
+  ],
+  devServer: {
+    contentBase: outPath,
+    compress: true,
+    port: 9000,
   },
 };

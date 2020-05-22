@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint *.js src/*.ts src/**/*.ts",
     "lint:fix": "yarn lint --fix",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "start": "node dist/bundle.js"
   },
   "license": "ISC",
