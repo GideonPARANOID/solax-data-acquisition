@@ -1,17 +1,20 @@
 import express from 'express';
+import { MongoClient } from 'mongodb';
 
 import * as config from './config';
-import { getRealTimeData } from './services';
+import { ServerDb } from './db';
+import * as routes from './routes';
 
-const app = express();
+(async () => {
+  const client = await new MongoClient(config.db.url).connect();
+  const db = new ServerDb(client.db(config.db.name));
 
-app.get('/current', async (req, res) => {
-  const data = await getRealTimeData();
+  const app = express();
 
-  res.send(data);
-});
+  Object.values(routes).forEach((route) => route(app, db));
 
-// start the Express server
-app.listen(config.serverPort, () => {
-  console.log('test');
-});
+  // start the Express server
+  app.listen(config.serverPort, () => {
+    console.log('test');
+  });
+})();

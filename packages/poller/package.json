@@ -1,21 +1,21 @@
 {
-  "name": "solax-server",
+  "name": "solax-poller",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "lint": "eslint src/**/*.{js,ts}",
+    "lint": "eslint *.js src/*.ts src/**/*.ts",
     "lint:fix": "yarn lint --fix",
     "build": "webpack",
     "start": "node dist/bundle.js"
   },
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "agenda": "^3.1.0",
     "mongodb": "^3.5.7",
     "solax-common": "1.0.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.6",
+    "@types/agenda": "^2.0.7",
     "@types/mongodb": "^3.5.18",
     "@types/node": "^14.0.1",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
