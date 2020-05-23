@@ -63,13 +63,20 @@ const unmarshallRTData = (
   date,
 });
 
-export const getRTData = async () => {
-  const date = new Date();
-  const { data }: AxiosResponse<RTAPI> = await axios.post(
-    `${config.solaxURL}/?optType=ReadRealTimeData`
-  );
+export const getRTData = async (): Promise<ParsedRT|undefined> => {
+  try {
+    const date = new Date();
+    const { data }: AxiosResponse<RTAPI> = await axios.post(
+      `${config.solaxURL}/?optType=ReadRealTimeData`
+    );
 
-  return unmarshallRTData(data, date);
+    if (!data.Data) {
+      throw new Error();
+    }
+    return unmarshallRTData(data, date);
+  } catch (error) {
+    console.error('API error')
+  }
 };
 
 export const extractStats = ({
