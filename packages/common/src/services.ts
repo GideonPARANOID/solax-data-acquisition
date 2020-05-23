@@ -5,7 +5,7 @@ import * as config from './config';
 
 const unmarshallRTData = (
   { Data: data, Information: info, ver, type }: RTAPI,
-  date: number
+  date: Date
 ): ParsedRT => ({
   pv: [
     {
@@ -64,7 +64,7 @@ const unmarshallRTData = (
 });
 
 export const getRTData = async () => {
-  const date = Date.now();
+  const date = new Date();
   const { data }: AxiosResponse<RTAPI> = await axios.post(
     `${config.solaxURL}/?optType=ReadRealTimeData`
   );

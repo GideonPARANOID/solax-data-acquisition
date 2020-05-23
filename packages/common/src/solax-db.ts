@@ -4,8 +4,8 @@ export class SolaxDb {
   protected db: Db;
 
   collections = {
-    minute: 'minutely',
-    day: 'daily',
+    minute: 'minute',
+    day: 'day',
     records: 'records',
   };
 

@@ -1,7 +1,7 @@
 import { MinuteStats, DayStats, Record } from 'solax-common/types';
 
 export const calcDayStats = (
-  dailyDate: number,
+  dayDate: Date,
   minutelyData: MinuteStats[]
 ): DayStats => {
   const getSumPvPower = (data: MinuteStats[]) =>
@@ -12,7 +12,7 @@ export const calcDayStats = (
   const minute = minutelyData.reduce(
     (max: Record, { date, pv }: MinuteStats): Record =>
       pv.power > max.value ? { date, value: pv.power } : max,
-    { date: 0, value: 0 }
+    { date: dayDate, value: 0 }
   );
 
   // sliding window total
@@ -28,8 +28,8 @@ export const calcDayStats = (
     .reduce(
       (max: Record, current: Record): Record =>
         current.value > max.value ? current : max,
-      { date: 0, value: 0 }
+      { date: dayDate, value: 0 }
     );
 
-  return { date: dailyDate, total, max: { minute, hour } };
+  return { date: dayDate, total, max: { minute, hour } };
 };

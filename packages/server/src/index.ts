@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { MongoClient } from 'mongodb';
 
 import * as config from './config';
@@ -11,10 +12,12 @@ import * as routes from './routes';
 
   const app = express();
 
+  app.use(cors());
+
   Object.values(routes).forEach((route) => route(app, db));
 
   // start the Express server
-  app.listen(config.serverPort, () => {
-    console.log('test');
-  });
+  app.listen(config.serverPort, () =>
+    console.log(`Server up & running on port ${config.serverPort}`)
+  );
 })();
