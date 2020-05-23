@@ -63,7 +63,7 @@ const unmarshallRTData = (
   date,
 });
 
-export const getRTData = async (): Promise<ParsedRT|undefined> => {
+export const getRTData = async (): Promise<ParsedRT | null> => {
   try {
     const date = new Date();
     const { data }: AxiosResponse<RTAPI> = await axios.post(
@@ -75,7 +75,8 @@ export const getRTData = async (): Promise<ParsedRT|undefined> => {
     }
     return unmarshallRTData(data, date);
   } catch (error) {
-    console.error('API error')
+    console.error('API error');
+    return null;
   }
 };
 
