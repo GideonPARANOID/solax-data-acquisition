@@ -3,7 +3,7 @@ import cors from 'cors';
 import { MongoClient } from 'mongodb';
 
 import * as config from './config';
-import { ServerDb } from './db';
+import { ServerDb } from './server-db';
 import * as routes from './routes';
 
 (async () => {

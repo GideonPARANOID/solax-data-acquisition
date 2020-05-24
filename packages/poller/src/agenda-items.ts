@@ -1,5 +1,5 @@
 import { extractStats, getRTData } from 'solax-common/services';
-import { PollerDb } from './db';
+import { PollerDb } from './poller-db';
 import { calcDayStats } from './aggregation';
 
 export const pollMinutely = (pollerDb: PollerDb) => async () => {

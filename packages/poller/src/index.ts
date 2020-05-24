@@ -2,7 +2,7 @@ import Agenda from 'agenda';
 import { MongoClient } from 'mongodb';
 
 import * as config from './config';
-import { PollerDb } from './db';
+import { PollerDb } from './poller-db';
 import { pollMinutely, generateDayStats } from './agenda-items';
 
 (async () => {
@@ -15,8 +15,9 @@ import { pollMinutely, generateDayStats } from './agenda-items';
   agenda.define('pollMinutely', pollMinutely(db));
   agenda.define('generateDayStats', generateDayStats(db));
 
-  await agenda.every('* * * * *', 'pollMinutely'); // every min
-  await agenda.every('0 0 * * *', 'generateDayStats'); // every day at midnight
+  await pollMinutely(db)()
+  // await agenda.every('* * * * *', 'pollMinutely'); // every min
+//  await agenda.every('0 0 * * *', 'generateDayStats'); // every day at midnight
 
   await agenda.start();
 })();

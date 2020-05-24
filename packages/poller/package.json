@@ -6,7 +6,7 @@
     "lint": "eslint *.js src/*.ts src/**/*.ts",
     "lint:fix": "yarn lint --fix",
     "build": "webpack --mode production",
-    "start": "node dist/bundle.js"
+    "start": "TZ='UTC' node dist/bundle.js"
   },
   "license": "ISC",
   "dependencies": {
