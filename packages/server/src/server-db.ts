@@ -28,8 +28,7 @@ export class ServerDb extends SolaxDb {
   }
 
   async getDay(date: Date): Promise<MinuteStats[]> {
-
-    console.log(getDayRange(date))
+    console.log(getDayRange(date));
     const cursor = await this.db
       .collection(this.collections.day)
       .find(getDayRange(date));
