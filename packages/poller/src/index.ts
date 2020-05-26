@@ -15,9 +15,8 @@ import { pollMinutely, generateDayStats } from './agenda-items';
   agenda.define('pollMinutely', pollMinutely(db));
   agenda.define('generateDayStats', generateDayStats(db));
 
-  await pollMinutely(db)()
-  // await agenda.every('* * * * *', 'pollMinutely'); // every min
-//  await agenda.every('0 0 * * *', 'generateDayStats'); // every day at midnight
+  await agenda.every('* * * * *', 'pollMinutely'); // every min
+  await agenda.every('0 0 * * *', 'generateDayStats'); // every day at midnight
 
   await agenda.start();
 })();

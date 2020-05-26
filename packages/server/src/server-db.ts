@@ -6,8 +6,8 @@ const getDayRange = (date: Date) => {
   next.setDate(new Date(date.getTime()).getDate() + 1);
   return {
     date: {
-      $gt: date.toISOString(),
-      $lte: next.toISOString(),
+      $gt: date,
+      $lte: next,
     },
   };
 };
@@ -28,6 +28,8 @@ export class ServerDb extends SolaxDb {
   }
 
   async getDay(date: Date): Promise<MinuteStats[]> {
+
+    console.log(getDayRange(date))
     const cursor = await this.db
       .collection(this.collections.day)
       .find(getDayRange(date));
