@@ -8,7 +8,9 @@ const url = 'http://192.168.1.1:8081';
 export const Home: FunctionComponent = () => {
   const [{ data }] = useAxios(`${url}/day`);
 
-  const [today] = useAxios(`${url}/day/2020-05-26/minute`);
+  const [today] = useAxios(
+    `${url}/day/${new Date().toISOString().slice(0, 10)}/minute`
+  );
 
   let todayChart = <b>loading</b>;
 
