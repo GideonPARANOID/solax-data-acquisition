@@ -1,5 +1,5 @@
 {
-  "name": "solax",
+  "name": "@gideonparanoid/solax",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -7,8 +7,8 @@
     "lint:fix": "yarn workspaces run lint:fix",
     "build": "yarn workspaces run build"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Gideon MW Jones<gideonparanoid>",
+  "license": "NONE",
   "workspaces": {
     "packages": [
       "packages/*"

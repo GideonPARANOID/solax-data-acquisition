@@ -9,10 +9,9 @@
     "baseUrl": ".",
     "paths": {
       "*": [ "node_modules/*" ],
-      "solax-common*": [ "../common/src*" ]
+      "solax-common*": [ "../common/src*" ],
+      "@/*": [ "src/*" ]
     }
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": [ "src/**/*" ]
 }

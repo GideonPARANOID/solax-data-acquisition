@@ -1,10 +1,11 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 import useAxios from 'axios-hooks';
-import { Line } from 'react-chartjs-2';
+
+import { ChartDay } from '@/components';
 
 const url = 'http://192.168.1.1:8081';
 
-export const Home = () => {
+export const Home: FunctionComponent = () => {
   const [{ data }] = useAxios(`${url}/day`);
 
   const [today] = useAxios(`${url}/day/2020-05-26/minute`);
@@ -12,17 +13,7 @@ export const Home = () => {
   let todayChart = <b>loading</b>;
 
   if (today.data) {
-    const dat = {
-      labels: today.data.map(({ date }) => date),
-      datasets: [
-        {
-          label: 'power',
-          data: today.data.map(({ pv }) => pv.power),
-        },
-      ],
-    };
-
-    todayChart = <Line data={dat} />;
+    todayChart = <ChartDay data={today.data} />;
   }
 
   if (data) {
