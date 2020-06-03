@@ -1,9 +1,13 @@
 import cors from 'cors';
+
 import express from 'express';
+
 import { MongoClient } from 'mongodb';
 
 import * as config from './config';
+
 import * as routes from './routes';
+
 import { ServerDb } from './server-db';
 
 (async () => {

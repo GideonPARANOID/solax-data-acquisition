@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from 'react';
+
 import { Line } from 'react-chartjs-2';
 
-import { movingAverage } from '@/utils';
 import { MinuteStats } from 'solax-common/types';
+
+import { movingAverage } from '@/utils';
 
 export interface IChartDay {
   data: MinuteStats[];

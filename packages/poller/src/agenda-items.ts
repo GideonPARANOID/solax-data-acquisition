@@ -1,6 +1,7 @@
+import { extractStats, getRTData } from 'solax-common/services';
+
 import { calcDayStats } from './aggregation';
 import { PollerDb } from './poller-db';
-import { extractStats, getRTData } from 'solax-common/services';
 
 export const pollMinutely = (pollerDb: PollerDb) => async () => {
   const date = new Date();
