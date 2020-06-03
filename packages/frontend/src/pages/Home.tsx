@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import { ChartDay } from '@/components';
+import { Page, ChartDay } from '@/components';
 import { useAxios } from '@/hooks';
 
 export const Home: FunctionComponent = () => {
@@ -10,9 +10,7 @@ export const Home: FunctionComponent = () => {
   );
 
   return (
-    <div>
-      <h1>Hello world!</h1>
-
+    <Page title={'Welcome'}>
       {allDays?.data && today?.data && (
         <>
           <ChartDay data={today.data} />
@@ -25,6 +23,6 @@ export const Home: FunctionComponent = () => {
           </ul>
         </>
       )}
-    </div>
+    </Page>
   );
 };

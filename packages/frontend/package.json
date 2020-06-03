@@ -10,6 +10,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "antd": "^4.3.1",
     "axios": "^0.19.2",
     "axios-hooks": "^1.10.0",
     "chart.js": "^2.9.3",

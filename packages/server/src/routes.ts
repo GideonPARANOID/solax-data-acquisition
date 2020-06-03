@@ -1,8 +1,7 @@
 import { Express, Request, Response } from 'express';
 
-import { getRTData } from 'solax-common/services';
-
 import { ServerDb } from './server-db';
+import { getRTData } from 'solax-common/services';
 
 export const current = (app: Express) =>
   app.get('/current', async (req: Request, res: Response) =>

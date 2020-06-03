@@ -1,9 +1,9 @@
 import Agenda from 'agenda';
 import { MongoClient } from 'mongodb';
 
+import { pollMinutely, generateDayStats } from './agenda-items';
 import * as config from './config';
 import { PollerDb } from './poller-db';
-import { pollMinutely, generateDayStats } from './agenda-items';
 
 (async () => {
   console.log('app', config);

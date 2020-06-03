@@ -1,7 +1,7 @@
 const path = require('path');
 
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const outPath = path.resolve(__dirname, 'dist');
 
