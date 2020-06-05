@@ -25,12 +25,8 @@ export class PollerDb extends SolaxDb {
   }
 
   async updateDay(data: DayStats): Promise<void> {
-    await this.db.collection(this.collections.day).update(
-      {
-        date: data.date,
-      },
-      data,
-      { upsert: true }
-    );
+    await this.db
+      .collection(this.collections.day)
+      .updateOne({ date: data.date }, { $set: data }, { upsert: true });
   }
 }
