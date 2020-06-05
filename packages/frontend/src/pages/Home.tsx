@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import { Page, ChartDay } from '@/components';
+import { AllDaysCalendar, Page, ChartDay } from '@/components';
 import { useAxios } from '@/hooks';
 
 export const Home: FunctionComponent = () => {
@@ -14,13 +14,7 @@ export const Home: FunctionComponent = () => {
       {allDays?.data && today?.data && (
         <>
           <ChartDay data={today.data} />
-          <ul>
-            {allDays.data.map(({ date, total }) => (
-              <li key={date}>
-                {date} - {total}
-              </li>
-            ))}
-          </ul>
+          <AllDaysCalendar data={allDays.data} />
         </>
       )}
     </Page>
