@@ -11,3 +11,8 @@ export const movingAverage = (values, count, defaultValue = 0) =>
         average(values.slice(index, index + count))
       )
     );
+
+export const format = {
+  power: (value: number) => `${(value / 1000).toFixed(3)}kW`,
+  energy: (value: number) => `${(value / 1000).toFixed(3)}kWh`,
+}
