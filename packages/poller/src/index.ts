@@ -17,7 +17,8 @@ import { PollerDb } from './poller-db';
   agenda.define('generateDayStats', generateDayStats(db));
 
   await agenda.every('* * * * *', 'pollMinutely'); // every min
-  await agenda.every('0 0 * * *', 'generateDayStats'); // every day at midnight
+  // await agenda.every('0 0 * * *', 'generateDayStats'); // every day at midnight
+  await agenda.every('0 * * * *', 'generateDayStats'); // every hour
 
   await agenda.start();
 })();

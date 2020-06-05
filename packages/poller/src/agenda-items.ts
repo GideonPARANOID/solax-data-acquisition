@@ -28,5 +28,5 @@ export const generateDayStats = (pollerDb: PollerDb) => async () => {
 
   console.log(dayStats);
 
-  await pollerDb.addDay(dayStats);
+  await pollerDb.updateDay(dayStats);
 };
