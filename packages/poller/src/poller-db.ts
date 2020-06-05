@@ -7,13 +7,11 @@ export class PollerDb extends SolaxDb {
   }
 
   async getMinutelyForDay(date: Date): Promise<MinuteStats[]> {
-    const startDate = date.setHours(0, 0, 0, 0);
-    const endDate = date.setHours(23, 59, 59, 999);
+    const startDate = new Date(date.setHours(0, 0, 0, 0));
+    const endDate = new Date(date.setHours(23, 59, 59, 999));
 
     console.log(
-      `between ${new Date(startDate).toISOString()} & ${new Date(
-        endDate
-      ).toISOString()}`
+      `between ${startDate.toISOString()} & ${endDate.toISOString()}`
     );
 
     const cursor = await this.db.collection(this.collections.minute).find({
