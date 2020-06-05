@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { RTAPI, ParsedRT, MinuteStats } from './types';
 import * as config from './config';
+import { RTAPI, ParsedRT, MinuteStats } from './types';
 
 const unmarshallRTData = (
   { Data: data, Information: info, ver, type }: RTAPI,

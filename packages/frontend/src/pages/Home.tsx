@@ -1,14 +1,28 @@
-import * as React from 'react';
-import useAxios from 'axios-hooks';
+import React, { FunctionComponent } from 'react';
 
-const url = 'http://localhost:8081/day/all';
+import { Page, ChartDay } from '@/components';
+import { useAxios } from '@/hooks';
 
-export const Home = () => {
-  const [{ data }] = useAxios(url);
+export const Home: FunctionComponent = () => {
+  const [allDays] = useAxios('/day');
+  const [today] = useAxios(
+    `/day/${new Date().toISOString().slice(0, 10)}/minute`
+  );
 
-  if (data) {
-    console.log(data);
-  }
-
-  return <h1>Hello world!</h1>;
+  return (
+    <Page title={'Welcome'}>
+      {allDays?.data && today?.data && (
+        <>
+          <ChartDay data={today.data} />
+          <ul>
+            {allDays.data.map(({ date, total }) => (
+              <li key={date}>
+                {date} - {total}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </Page>
+  );
 };

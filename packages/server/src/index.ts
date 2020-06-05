@@ -1,10 +1,14 @@
-import express from 'express';
 import cors from 'cors';
+
+import express from 'express';
+
 import { MongoClient } from 'mongodb';
 
 import * as config from './config';
-import { ServerDb } from './server-db';
+
 import * as routes from './routes';
+
+import { ServerDb } from './server-db';
 
 (async () => {
   const client = await new MongoClient(config.db.url).connect();
