@@ -11,7 +11,7 @@ export const AllDaysCalendar: FunctionComponent<IAllDaysCalendar> = ({
   data,
 }: IAllDaysCalendar) => {
   const dateCellRender = (day) => {
-    const stats = data.find(({ date }: DayStats) => day.isSame(date, 'day'));
+    const stats = data.find(({ date }: DayStats) => day.utc().isSame(date, 'day'));
     return stats ? (
       <>
         <b>Total:</b> {stats.total}
