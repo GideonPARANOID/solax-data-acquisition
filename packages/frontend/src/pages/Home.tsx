@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { AllDaysCalendar, Page, ChartDay, DescriptionDay } from '@/components';
+import { DayStats } from 'solax-common/types';
+
+import { AllDaysCalendar, Page, ChartDay, StatsDay } from '@/components';
 import { useAxios } from '@/hooks';
 
 export const Home: FunctionComponent = () => {
@@ -10,13 +12,15 @@ export const Home: FunctionComponent = () => {
   const [allDays] = useAxios('/day');
   const [today] = useAxios(`/day/${date}/minute`);
 
-  console.log(allDays);
+  const dayStats = allDays?.data?.find(
+    (day: DayStats) => new Date(day.date).toISOString().slice(0, 10) === date
+  );
   return (
     <Page title={date}>
       {allDays?.data && today?.data && (
         <>
           <ChartDay data={today.data} />
-          <DescriptionDay data={allDays.data[allDays.data.length - 1]} />
+          <StatsDay data={dayStats} />
           <AllDaysCalendar data={allDays.data} />
         </>
       )}
