@@ -21,7 +21,7 @@ export const Home: FunctionComponent = () => {
         <>
           <ChartDay data={today.data} />
           <StatsDay data={dayStats} />
-          <AllDaysCalendar data={allDays.data} />
+          <AllDaysCalendar date={new Date(date)} data={allDays.data} />
         </>
       )}
     </Page>

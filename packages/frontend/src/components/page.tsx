@@ -1,5 +1,6 @@
 import { Breadcrumb, Layout, Typography } from 'antd';
 import React, { ReactChild, ReactChildren, FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
 
 const styles = {
   contentWrapper: {
@@ -23,8 +24,12 @@ export const Page: FunctionComponent<IPage> = ({ title, children }: IPage) => (
     </Layout.Header>
     <Layout.Content style={styles.contentWrapper}>
       <Breadcrumb>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>{title}</Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link to="/">Home</Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link to="#">{title}</Link>
+        </Breadcrumb.Item>
       </Breadcrumb>
       <div style={styles.content}>{children}</div>
     </Layout.Content>

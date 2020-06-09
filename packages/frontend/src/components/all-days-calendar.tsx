@@ -1,14 +1,17 @@
 import { Calendar, Statistic } from 'antd';
+import moment from 'moment';
 import React, { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 
 import { DayStats } from 'solax-common/types';
 
 export interface IAllDaysCalendar {
+  date: Date;
   data: DayStats[];
 }
 
 export const AllDaysCalendar: FunctionComponent<IAllDaysCalendar> = ({
+  date: defaultValue,
   data,
 }: IAllDaysCalendar) => {
   const dateCellRender = (day) => {
@@ -62,6 +65,7 @@ export const AllDaysCalendar: FunctionComponent<IAllDaysCalendar> = ({
 
   return (
     <Calendar
+      defaultValue={moment(defaultValue)}
       dateCellRender={dateCellRender}
       monthCellRender={monthCellRender}
     />
