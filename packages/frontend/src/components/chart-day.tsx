@@ -1,5 +1,5 @@
+import { yellow } from '@ant-design/colors';
 import React, { FunctionComponent } from 'react';
-
 import { Line } from 'react-chartjs-2';
 
 import { MinuteStats } from 'solax-common/types';
@@ -11,21 +11,21 @@ export interface IChartDay {
 }
 
 export const ChartDay: FunctionComponent<IChartDay> = ({ data }) => {
-  const powerValues = data.map(({ pv }: MinuteStats) => pv.power);
+  const powerValues = data.map(({ pv }: MinuteStats) => pv.power / 1000);
 
   const chart = {
     labels: data.map(({ date }: MinuteStats) => new Date(date)),
     datasets: [
       {
-        label: 'Power (watts)',
+        label: 'Power (Kilowatts)',
         data: powerValues,
         fill: false,
         pointRadius: 0,
       },
       {
-        label: 'Hour moving average power (watts) ',
+        label: 'Hour moving average power (Kilowatts) ',
         data: movingAverage(powerValues, 60),
-        backgroundColor: 'rgba(0, 0, 128, 0.5)',
+        backgroundColor: yellow.primary,
         pointRadius: 0,
       },
     ],
@@ -39,6 +39,9 @@ export const ChartDay: FunctionComponent<IChartDay> = ({ data }) => {
           time: {
             unit: 'minute',
             stepSize: 5,
+            displayFormats: {
+              minute: 'hh:mm',
+            },
           },
         },
       ],
