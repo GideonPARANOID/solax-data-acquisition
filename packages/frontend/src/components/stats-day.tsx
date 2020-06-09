@@ -11,7 +11,7 @@ export interface IStatsDay {
 
 export const StatsDay: FunctionComponent<IStatsDay> = ({ data }: IStatsDay) => {
   const date = new Date();
-  date.setHours(date.getHours() + Math.round(date.getMinutes() / 60));
+  date.setHours(date.getHours() + 1);
   const nextUpdate = date.setMinutes(0, 0, 0);
 
   return (
