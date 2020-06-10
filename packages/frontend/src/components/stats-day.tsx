@@ -35,8 +35,6 @@ export const StatsDay: FunctionComponent<IStatsDay> = ({ data }: IStatsDay) => {
         <Statistic
           title="Max minute time"
           value={getTime(new Date(data.max.minute.date))}
-          suffix="kW"
-          precision={3}
         />
       </Col>
       <Col span={4}>

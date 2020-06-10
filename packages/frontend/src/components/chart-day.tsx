@@ -1,4 +1,4 @@
-import { yellow } from '@ant-design/colors';
+import { red, blue } from '@ant-design/colors';
 import React, { FunctionComponent } from 'react';
 import { Line } from 'react-chartjs-2';
 
@@ -13,22 +13,30 @@ export interface IChartDay {
 export const ChartDay: FunctionComponent<IChartDay> = ({ data }) => {
   const powerValues = data.map(({ pv }: MinuteStats) => pv.power / 1000);
 
-  const chart = {
-    labels: data.map(({ date }: MinuteStats) => new Date(date)),
-    datasets: [
-      {
-        label: 'Power (Kilowatts)',
-        data: powerValues,
-        fill: false,
-        pointRadius: 0,
-      },
-      {
-        label: 'Hour moving average power (Kilowatts) ',
-        data: movingAverage(powerValues, 60),
-        backgroundColor: yellow.primary,
-        pointRadius: 0,
-      },
-    ],
+  const chart = (canvas: HTMLCanvasElement) => {
+    const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, 1000); // no idea where this gradient dimension comes from
+    gradient.addColorStop(0, red.primary);
+    gradient.addColorStop(1, blue.primary);
+
+    return {
+      labels: data.map(({ date }: MinuteStats) => new Date(date)),
+      datasets: [
+        {
+          label: 'Power (Kilowatts)',
+          data: powerValues,
+          fill: false,
+          pointRadius: 0,
+        },
+        {
+          label: 'Hour moving average power (Kilowatts) ',
+          data: movingAverage(powerValues, 60),
+          backgroundColor: gradient,
+          pointRadius: 0,
+        },
+      ],
+    };
   };
 
   const options = {
@@ -40,7 +48,7 @@ export const ChartDay: FunctionComponent<IChartDay> = ({ data }) => {
             unit: 'minute',
             stepSize: 5,
             displayFormats: {
-              minute: 'hh:mm',
+              minute: 'HH:mm',
             },
           },
         },
