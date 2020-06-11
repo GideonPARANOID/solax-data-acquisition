@@ -4,9 +4,9 @@ export class SolaxDb {
   protected db: Db;
 
   collections = {
-    minute: 'minutely',
-    day: 'daily',
-    records: 'records',
+    minute: 'minute',
+    day: 'day',
+    records: 'record',
   };
 
   constructor(db: Db) {

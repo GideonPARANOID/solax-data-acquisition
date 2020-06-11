@@ -1,6 +1,7 @@
 import { extractStats, getRTData } from 'solax-common/services';
-import { PollerDb } from './db';
+
 import { calcDayStats } from './aggregation';
+import { PollerDb } from './poller-db';
 
 export const pollMinutely = (pollerDb: PollerDb) => async () => {
   const date = new Date();
@@ -8,7 +9,7 @@ export const pollMinutely = (pollerDb: PollerDb) => async () => {
 
   const data = extractStats(await getRTData());
 
-  data.date = new Date(data.date).setSeconds(0, 0);
+  data.date.setSeconds(0, 0);
 
   console.log('poll.data', data);
 
@@ -23,9 +24,9 @@ export const generateDayStats = (pollerDb: PollerDb) => async () => {
 
   console.log(minutely);
 
-  const dayStats = calcDayStats(date.getTime(), minutely);
+  const dayStats = calcDayStats(date, minutely);
 
   console.log(dayStats);
 
-  await pollerDb.addDay(dayStats);
+  await pollerDb.updateDay(dayStats);
 };

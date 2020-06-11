@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { RTAPI, ParsedRT, MinuteStats } from './types';
 import * as config from './config';
+import { RTAPI, ParsedRT, MinuteStats } from './types';
 
 const unmarshallRTData = (
   { Data: data, Information: info, ver, type }: RTAPI,
-  date: number
+  date: Date
 ): ParsedRT => ({
   pv: [
     {
@@ -63,13 +63,21 @@ const unmarshallRTData = (
   date,
 });
 
-export const getRTData = async () => {
-  const date = Date.now();
-  const { data }: AxiosResponse<RTAPI> = await axios.post(
-    `${config.solaxURL}/?optType=ReadRealTimeData`
-  );
+export const getRTData = async (): Promise<ParsedRT | null> => {
+  try {
+    const date = new Date();
+    const { data }: AxiosResponse<RTAPI> = await axios.post(
+      `${config.solaxURL}/?optType=ReadRealTimeData`
+    );
 
-  return unmarshallRTData(data, date);
+    if (!data.Data) {
+      throw new Error();
+    }
+    return unmarshallRTData(data, date);
+  } catch (error) {
+    console.error('API error');
+    return null;
+  }
 };
 
 export const extractStats = ({

@@ -5,7 +5,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 module.exports = {
   entry: './src/index.ts',
   target: 'node',
-  mode: 'production',
   module: {
     rules: [
       {
@@ -25,7 +24,7 @@ module.exports = {
   },
   resolve: {
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
-    extensions: ['.ts', '.js', '.json'],
+    extensions: ['.js', '.ts', '.json'],
   },
   output: {
     filename: 'bundle.js',
