@@ -8,9 +8,7 @@ export const Records: FunctionComponent = () => {
 
   return (
     <Page title={'Records'}>
-      {records?.data && (
-        <StatsRecords data={records.data} />
-      )}
+      {records?.data && <StatsRecords data={records.data} />}
     </Page>
   );
 };
