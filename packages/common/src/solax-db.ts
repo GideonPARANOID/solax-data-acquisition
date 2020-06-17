@@ -6,7 +6,7 @@ export class SolaxDb {
   collections = {
     minute: 'minute',
     day: 'day',
-    records: 'record',
+    record: 'record',
   };
 
   constructor(db: Db) {

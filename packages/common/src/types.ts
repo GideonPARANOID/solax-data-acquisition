@@ -77,3 +77,11 @@ export type DayStats = {
     hour: Record;
   };
 };
+
+export type RecordStats = {
+  max: {
+    minute: Record;
+    hour: Record;
+    day: Record;
+  };
+};

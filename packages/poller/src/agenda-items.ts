@@ -44,7 +44,7 @@ export const generateDayStats = (pollerDb: PollerDb) => async () => {
   if (day.total > records.max.day.value) {
     records.max.day = {
       date: day.date,
-      value: day.total;
+      value: day.total,
     };
     brokenRecord = true;
   }
