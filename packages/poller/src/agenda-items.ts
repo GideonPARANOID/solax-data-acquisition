@@ -24,9 +24,34 @@ export const generateDayStats = (pollerDb: PollerDb) => async () => {
 
   console.log(minutely);
 
-  const dayStats = calcDayStats(date, minutely);
+  const day = calcDayStats(date, minutely);
 
-  console.log(dayStats);
+  console.log(day);
 
-  await pollerDb.updateDay(dayStats);
+  const records = await pollerDb.getRecords();
+  let brokenRecord = false;
+
+  if (day.max.minute.value > records.max.minute.value) {
+    records.max.minute = day.max.minute;
+    brokenRecord = true;
+  }
+
+  if (day.max.hour.value > records.max.hour.value) {
+    records.max.hour = day.max.hour;
+    brokenRecord = true;
+  }
+
+  if (day.total > records.max.day.value) {
+    records.max.day = {
+      date: day.date,
+      value: day.total;
+    };
+    brokenRecord = true;
+  }
+
+  if (brokenRecord) {
+    await pollerDb.updateRecords(records);
+  }
+
+  await pollerDb.updateDay(day);
 };
