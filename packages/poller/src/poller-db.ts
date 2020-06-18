@@ -24,7 +24,7 @@ export class PollerDb extends SolaxDb {
   }
 
   async getRecords(): Promise<RecordStats> {
-    const cursor = await this.db.collection(this.collections.records).find({});
+    const cursor = await this.db.collection(this.collections.record).find({});
 
     return (
       (await cursor.toArray())[0] || {
@@ -38,6 +38,6 @@ export class PollerDb extends SolaxDb {
   }
 
   async updateRecords(data: RecordStats): Promise<void> {
-    await this.db.collection(this.collections.records).replaceOne({}, data);
+    await this.db.collection(this.collections.record).replaceOne({}, data);
   }
 }
