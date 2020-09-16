@@ -12,7 +12,7 @@ type RTDataEntity = {
   power: number;
 };
 
-type UnitDescription = {
+type UnitDesc = {
   name: string;
   short: string;
 };
@@ -50,10 +50,10 @@ export type ParsedRT = {
     systemMax: number;
   };
   units: {
-    current: UnitDescription;
-    power: UnitDescription;
-    voltage: UnitDescription;
-    frequency: UnitDescription;
+    current: UnitDesc;
+    power: UnitDesc;
+    voltage: UnitDesc;
+    frequency: UnitDesc;
   };
 };
 
@@ -75,5 +75,13 @@ export type DayStats = {
   max: {
     minute: Record;
     hour: Record;
+  };
+};
+
+export type RecordStats = {
+  max: {
+    minute: Record;
+    hour: Record;
+    day: Record;
   };
 };

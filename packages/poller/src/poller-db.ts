@@ -14,22 +14,22 @@ export class PollerDb extends SolaxDb {
       `between ${startDate.toISOString()} & ${endDate.toISOString()}`
     );
 
-    const cursor = await this.db
-      .collection(this.collections.minute)
-      .find({
-        date: {
-          $gte: startDate,
-          $lte: endDate,
-        },
-      });
-
-    return (await cursor.toArray())[0] || {
-      max: {
-        minute: { date: new Date(0), value: 0 },
-        hour: { date: new Date(0), value: 0 },
-        day: { date: new Date(0), value: 0 },
+    const cursor = await this.db.collection(this.collections.minute).find({
+      date: {
+        $gte: startDate,
+        $lte: endDate,
       },
-    };
+    });
+
+    return (
+      (await cursor.toArray())[0] || {
+        max: {
+          minute: { date: new Date(0), value: 0 },
+          hour: { date: new Date(0), value: 0 },
+          day: { date: new Date(0), value: 0 },
+        },
+      }
+    );
   }
 
   async updateDay(data: DayStats): Promise<void> {
@@ -39,16 +39,11 @@ export class PollerDb extends SolaxDb {
   }
 
   async getRecords(): Promise<RecordStats> {
-    const cursor = await this.db
-      .collection(this.collections.records)
-    .find({})
-
-    retur cursor.toArray()
+    const cursor = await this.db.collection(this.collections.records).find({});
+    return (await cursor.toArray())[0];
   }
 
   async updateRecords(data: RecordStats): Promise<void> {
-    await this.db
-      .collection(this.collections.records)
-      .replaceOne({ }, data);
+    await this.db.collection(this.collections.records).replaceOne({}, data);
   }
 }

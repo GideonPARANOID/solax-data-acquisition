@@ -1,7 +1,35 @@
 import { extractStats, getRTData } from 'solax-common/services';
+import { DayStats } from 'solax-common/types';
 
 import { calcDayStats } from './aggregation';
 import { PollerDb } from './poller-db';
+
+const updateRecords = async (pollerDb: PollerDb, day: DayStats) => {
+  const records = await pollerDb.getRecords();
+  let brokenRecord = false;
+
+  if (day.max.minute.value > records.max.minute.value) {
+    records.max.minute = day.max.minute;
+    brokenRecord = true;
+  }
+
+  if (day.max.hour.value > records.max.hour.value) {
+    records.max.hour = day.max.hour;
+    brokenRecord = true;
+  }
+
+  if (day.total > records.max.day.value) {
+    records.max.day = {
+      date: day.date,
+      value: day.total,
+    };
+    brokenRecord = true;
+  }
+
+  if (brokenRecord) {
+    await pollerDb.updateRecords(records);
+  }
+};
 
 export const pollMinutely = (pollerDb: PollerDb) => async () => {
   const date = new Date();
@@ -28,30 +56,5 @@ export const generateDayStats = (pollerDb: PollerDb) => async () => {
 
   console.log(day);
 
-  const records = await pollerDb.getRecords();
-  let brokenRecord = false;
-
-  if (day.max.minute.value > records.max.minute.value) {
-    records.max.minute = day.max.minute;
-    brokenRecord = true;
-  }
-
-  if (day.max.hour.value > records.max.hour.value) {
-    records.max.hour = day.max.hour;
-    brokenRecord = true;
-  }
-
-  if (day.total > records.max.day.value) {
-    records.max.day = {
-      date: day.date,
-      value: day.total;
-    };
-    brokenRecord = true;
-  }
-
-  if (brokenRecord) {
-    await pollerDb.updateRecords(records);
-  }
-
-  await pollerDb.updateDay(day);
+  await Promise.all([updateRecords(pollerDb, day), pollerDb.updateDay(day)]);
 };
