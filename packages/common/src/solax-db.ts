@@ -12,4 +12,16 @@ export class SolaxDb {
   constructor(db: Db) {
     this.db = db;
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  protected getDayRangeQuery(date: Date): object {
+    const next = new Date(date.getTime());
+    next.setDate(new Date(date.getTime()).getDate() + 1);
+    return {
+      date: {
+        $gt: date,
+        $lte: next,
+      },
+    };
+  }
 }

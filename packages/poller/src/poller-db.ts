@@ -14,12 +14,9 @@ export class PollerDb extends SolaxDb {
       `between ${startDate.toISOString()} & ${endDate.toISOString()}`
     );
 
-    const cursor = await this.db.collection(this.collections.minute).find({
-      date: {
-        $gte: startDate,
-        $lte: endDate,
-      },
-    });
+    const cursor = await this.db
+      .collection(this.collections.minute)
+      .find(this.getDayRangeQuery(startDate));
 
     return (
       (await cursor.toArray())[0] || {
