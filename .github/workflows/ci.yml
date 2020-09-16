@@ -4,9 +4,7 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js
@@ -19,3 +17,15 @@ jobs:
     - run: yarn build
       env:
         CI: true
+    - uses: actions/upload-artifact@v2
+      with:
+        name: frontend
+        path: packages/frontend/dist/
+    - uses: actions/upload-artifact@v2
+      with:
+        name: poller
+        path: packages/poller/dist/
+    - uses: actions/upload-artifact@v2
+      with:
+        name: server
+        path: packages/server/dist/
