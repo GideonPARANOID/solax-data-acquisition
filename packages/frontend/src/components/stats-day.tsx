@@ -13,13 +13,14 @@ export const StatsDay: FunctionComponent<IStatsDay> = ({ data }: IStatsDay) => {
   const date = new Date();
   date.setHours(date.getHours() + 1);
   const nextUpdate = date.setMinutes(0, 0, 0);
+  const defaultTime = -3600000; // -1 hours
 
   return (
     <Row>
       <Col span={4}>
         <Statistic
           title="Total energy"
-          value={data.total / 1000}
+          value={data?.total ?? 0 / 1000}
           suffix="kWh"
           precision={3}
         />
@@ -34,15 +35,13 @@ export const StatsDay: FunctionComponent<IStatsDay> = ({ data }: IStatsDay) => {
       <Col span={4}>
         <Statistic
           title="Max minute time"
-          value={getTime(new Date(data.max.minute.date))}
-          suffix="kW"
-          precision={3}
+          value={getTime(new Date(data?.max.minute.date ?? defaultTime))}
         />
       </Col>
       <Col span={4}>
         <Statistic
           title="Max minute power"
-          value={data.max.minute.value / 1000}
+          value={data?.max.minute.value ?? 0 / 1000}
           suffix="kW"
           precision={3}
         />
@@ -50,13 +49,13 @@ export const StatsDay: FunctionComponent<IStatsDay> = ({ data }: IStatsDay) => {
       <Col span={4}>
         <Statistic
           title="Max hour time"
-          value={getTime(new Date(data.max.hour.date))}
+          value={getTime(new Date(data?.max.hour.date ?? defaultTime))}
         />
       </Col>
       <Col span={4}>
         <Statistic
           title="Max hour energy"
-          value={data.max.hour.value / 1000}
+          value={data?.max.hour.value ?? 0 / 1000}
           suffix="kW"
           precision={3}
         />

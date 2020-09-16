@@ -1,4 +1,4 @@
-export const getTime = (date: Date): string => `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+export const getTime = (date: Date): string => `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
 
 export const average = (values: number[]) =>
   values.reduce((total, current) => total + current, 0) / values.length;

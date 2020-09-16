@@ -24,7 +24,7 @@ export const AllDaysCalendar: FunctionComponent<IAllDaysCalendar> = ({
         <Link to={`/date/${day.utc().toISOString().slice(0, 10)}`}>
           <Statistic
             title={'Total energy'}
-            value={stats.total / 1000}
+            value={stats?.total / 1000}
             suffix="kWh"
             precision={3}
           />
