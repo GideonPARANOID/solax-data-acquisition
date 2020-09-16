@@ -1,5 +1,5 @@
 import { SolaxDb } from 'solax-common/solax-db';
-import { MinuteStats, DayStats } from 'solax-common/types';
+import { MinuteStats, DayStats, RecordStats } from 'solax-common/types';
 
 const getDayRange = (date: Date) => {
   const next = new Date(date.getTime());
@@ -40,5 +40,10 @@ export class ServerDb extends SolaxDb {
       .collection(this.collections.minute)
       .find(getDayRange(date));
     return cursor.toArray();
+  }
+
+  async getRecords(): Promise<RecordStats> {
+    const cursor = await this.db.collection(this.collections.records).find({});
+    return (await cursor.toArray())[0];
   }
 }

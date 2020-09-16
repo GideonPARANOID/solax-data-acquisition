@@ -28,3 +28,8 @@ export const getDayMinutes = (app: Express, db: ServerDb) =>
   app.get('/day/:date/minute', async ({ params }: Request, res: Response) =>
     res.send(await db.getDayMinutes(new Date(params.date)))
   );
+
+export const getRecords = (app: Express, db: ServerDb) =>
+  app.get('/records', async (req: Request, res: Response) =>
+    res.send(await db.getRecords())
+  );
