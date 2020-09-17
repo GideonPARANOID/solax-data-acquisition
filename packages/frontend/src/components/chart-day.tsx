@@ -24,13 +24,13 @@ export const ChartDay: FunctionComponent<IChartDay> = ({ data }) => {
       labels: data.map(({ date }: MinuteStats) => new Date(date)),
       datasets: [
         {
-          label: 'Power (Kilowatts)',
+          label: 'Power (kW)',
           data: powerValues,
           fill: false,
           pointRadius: 0,
         },
         {
-          label: 'Hour moving average power (Kilowatts) ',
+          label: 'Hour moving average power (kW) ',
           data: movingAverage(powerValues, 60),
           backgroundColor: gradient,
           pointRadius: 0,
