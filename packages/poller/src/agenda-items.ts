@@ -33,13 +33,13 @@ const updateRecords = async (pollerDb: PollerDb, day: DayStats) => {
 
 export const pollMinutely = (pollerDb: PollerDb) => async () => {
   const date = new Date();
-  console.log(`poll ${date.toISOString()}`);
+  console.log(`pollMinutely ${date.toISOString()}`);
 
   const data = extractStats(await getRTData());
 
   data.date.setSeconds(0, 0);
 
-  console.log('poll.data', data);
+  console.log('pollMinutely.data', data);
 
   pollerDb.addMinutely(data);
 };
@@ -50,11 +50,11 @@ export const generateDayStats = (pollerDb: PollerDb) => async () => {
 
   const minutely = await pollerDb.getMinutelyForDay(date);
 
-  console.log(minutely);
+  console.log('minutely', minutely);
 
   const day = calcDayStats(date, minutely);
 
-  console.log(day);
+  console.log('generateDayStats.day', day);
 
   await Promise.all([updateRecords(pollerDb, day), pollerDb.updateDay(day)]);
 };

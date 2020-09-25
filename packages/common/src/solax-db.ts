@@ -15,7 +15,7 @@ export class SolaxDb {
 
   // eslint-disable-next-line class-methods-use-this
   protected getDayRangeQuery(date: Date): object {
-    const next = new Date(date.getTime());
+    const next = new Date(new Date(date.getTime()).setHours(0, 0, 0, 0));
     next.setDate(new Date(date.getTime()).getDate() + 1);
     return {
       date: {
