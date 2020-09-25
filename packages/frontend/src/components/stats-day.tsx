@@ -20,7 +20,7 @@ export const StatsDay: FunctionComponent<IStatsDay> = ({ data }: IStatsDay) => {
       <Col span={4}>
         <Statistic
           title="Total energy"
-          value={data?.total ?? 0 / 1000}
+          value={(data?.total ?? 0) / 1000}
           suffix="kWh"
           precision={3}
         />
@@ -41,7 +41,7 @@ export const StatsDay: FunctionComponent<IStatsDay> = ({ data }: IStatsDay) => {
       <Col span={4}>
         <Statistic
           title="Max minute power"
-          value={data?.max.minute.value ?? 0 / 1000}
+          value={(data?.max.minute.value ?? 0) / 1000}
           suffix="kW"
           precision={3}
         />
@@ -55,7 +55,7 @@ export const StatsDay: FunctionComponent<IStatsDay> = ({ data }: IStatsDay) => {
       <Col span={4}>
         <Statistic
           title="Max hour energy"
-          value={data?.max.hour.value ?? 0 / 1000}
+          value={(data?.max.hour.value ?? 0) / 1000}
           suffix="kW"
           precision={3}
         />
