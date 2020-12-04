@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -14,7 +14,29 @@ jobs:
     - run: npm install -g yarn
     - run: yarn
     - run: yarn lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: npm install -g yarn
+    - run: yarn
     - run: yarn test
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: npm install -g yarn
+    - run: yarn
     - run: yarn build
       env:
         CI: true
