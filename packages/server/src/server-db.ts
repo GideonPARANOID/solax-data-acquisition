@@ -1,7 +1,7 @@
-import { SolaxDb } from 'solax-common/solax-db';
+import { SolaxDB } from 'solax-common/solax-db';
 import { MinuteStats, DayStats, RecordStats } from 'solax-common/types';
 
-export class ServerDb extends SolaxDb {
+export class ServerDB extends SolaxDB {
   async getMinute(date: Date = new Date()): Promise<MinuteStats> {
     const startOfMinute = date.setSeconds(0, 0);
 

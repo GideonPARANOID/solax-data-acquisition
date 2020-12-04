@@ -8,11 +8,11 @@ import * as config from './config';
 
 import * as routes from './routes';
 
-import { ServerDb } from './server-db';
+import { ServerDB } from './server-db';
 
 (async () => {
   const client = await new MongoClient(config.db.url).connect();
-  const db = new ServerDb(client.db(config.db.name));
+  const db = new ServerDB(client.db(config.db.name));
 
   const app = express();
 

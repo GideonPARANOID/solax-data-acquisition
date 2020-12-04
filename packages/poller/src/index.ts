@@ -4,14 +4,14 @@ import { MongoClient } from 'mongodb';
 
 import { pollMinutely, generateDayStats } from './agenda-items';
 import * as config from './config';
-import { PollerDb } from './poller-db';
+import { PollerDB } from './poller-db';
 
 (async () => {
   console.log('app', config);
-  const agenda = new Agenda({ db: { address: config.agendaDb.url } });
+  const agenda = new Agenda({ db: { address: config.agendaDB.url } });
 
   const client = await new MongoClient(config.db.url).connect();
-  const db = new PollerDb(client.db(config.db.name));
+  const db = new PollerDB(client.db(config.db.name));
 
   agenda.define('pollMinutely', pollMinutely(db));
   agenda.define('generateDayStats', generateDayStats(db));

@@ -1,7 +1,7 @@
 import { solaxURL, db } from 'solax-common/config';
 
-const agendaDb = {
+const agendaDB = {
   url: db.url,
 };
 
-export { agendaDb, db, solaxURL };
+export { agendaDB, db, solaxURL };

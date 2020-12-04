@@ -1,7 +1,7 @@
-import { SolaxDb } from 'solax-common/solax-db';
+import { SolaxDB } from 'solax-common/solax-db';
 import { MinuteStats, DayStats, RecordStats } from 'solax-common/types';
 
-export class PollerDb extends SolaxDb {
+export class PollerDB extends SolaxDB {
   async addMinutely(data: MinuteStats): Promise<void> {
     await this.db.collection(this.collections.minute).insertOne(data);
   }
