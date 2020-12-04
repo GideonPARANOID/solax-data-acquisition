@@ -41,7 +41,7 @@ export const pollMinutely = (pollerDb: PollerDb) => async () => {
 
   console.log('pollMinutely.data', data);
 
-  pollerDb.addMinutely(data);
+  await pollerDb.addMinutely(data);
 };
 
 export const generateDayStats = (pollerDb: PollerDb) => async () => {
