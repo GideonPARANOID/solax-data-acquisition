@@ -2,10 +2,14 @@ import * as dotenv from 'dotenv';
 
 const { parsed } = dotenv.config();
 
-const solaxURL = parsed.solax_url;
+/* eslint-disable-next-line camelcase */
+const solaxURL = parsed?.solax_url;
+
+/* eslint-disable-next-line camelcase */
+const dbURL = parsed?.db_url;
 
 const db = {
-  url: parsed.db_url,
+  url: dbURL,
   name: 'solax',
 };
 

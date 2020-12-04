@@ -5,6 +5,7 @@
   "scripts": {
     "lint": "eslint *.js src/*.tsx src/**/*.tsx",
     "lint:fix": "yarn lint --fix",
+    "test": "exit 0",
     "build": "webpack --mode production",
     "start:dev": "webpack-dev-server --open --mode development"
   },

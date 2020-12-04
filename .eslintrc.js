@@ -5,10 +5,13 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:prettier/recommended'
   ],
-  plugins: ['@typescript-eslint', 'import' , 'prettier'],
+  plugins: ['@typescript-eslint', 'import' , 'prettier', 'jest'],
   parserOptions: {
     'ecmaVersion': 2018,
     'sourceType': 'module'
+  },
+  env: {
+    'jest/globals': true
   },
   settings: {
     'import/resolver': {

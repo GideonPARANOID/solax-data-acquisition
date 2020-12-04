@@ -2,10 +2,10 @@ import { extractStats, getRTData } from 'solax-common/services';
 import { DayStats } from 'solax-common/types';
 
 import { calcDayStats } from './aggregation';
-import { PollerDb } from './poller-db';
+import { PollerDB } from './poller-db';
 
-const updateRecords = async (pollerDb: PollerDb, day: DayStats) => {
-  const records = await pollerDb.getRecords();
+export const updateRecords = async (pollerDB: PollerDB, day: DayStats) => {
+  const records = await pollerDB.getRecords();
   let brokenRecord = false;
 
   if (day.max.minute.value > records.max.minute.value) {
@@ -27,11 +27,11 @@ const updateRecords = async (pollerDb: PollerDb, day: DayStats) => {
   }
 
   if (brokenRecord) {
-    await pollerDb.updateRecords(records);
+    await pollerDB.updateRecords(records);
   }
 };
 
-export const pollMinutely = (pollerDb: PollerDb) => async () => {
+export const pollMinutely = (pollerDB: PollerDB) => async () => {
   const date = new Date();
   console.log(`pollMinutely ${date.toISOString()}`);
 
@@ -41,14 +41,14 @@ export const pollMinutely = (pollerDb: PollerDb) => async () => {
 
   console.log('pollMinutely.data', data);
 
-  pollerDb.addMinutely(data);
+  await pollerDB.addMinutely(data);
 };
 
-export const generateDayStats = (pollerDb: PollerDb) => async () => {
+export const generateDayStats = (pollerDB: PollerDB) => async () => {
   const date = new Date();
   console.log(`generateDayStats ${date.toISOString()}`);
 
-  const minutely = await pollerDb.getMinutelyForDay(date);
+  const minutely = await pollerDB.getMinutelyForDay(date);
 
   console.log('minutely', minutely);
 
@@ -56,5 +56,5 @@ export const generateDayStats = (pollerDb: PollerDb) => async () => {
 
   console.log('generateDayStats.day', day);
 
-  await Promise.all([updateRecords(pollerDb, day), pollerDb.updateDay(day)]);
+  await Promise.all([updateRecords(pollerDB, day), pollerDB.updateDay(day)]);
 };

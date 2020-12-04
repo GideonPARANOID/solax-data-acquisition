@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint *.js src/*.ts src/**/*.ts",
     "lint:fix": "yarn lint --fix",
+    "test": "exit 0",
     "build": "tsc",
     "start": "node dist/index.js"
   },

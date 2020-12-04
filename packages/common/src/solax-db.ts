@@ -1,7 +1,7 @@
-import { Db } from 'mongodb';
+import { Db as DB } from 'mongodb';
 
-export class SolaxDb {
-  protected db: Db;
+export class SolaxDB {
+  protected db: DB;
 
   collections = {
     minute: 'minute',
@@ -9,7 +9,7 @@ export class SolaxDb {
     records: 'record',
   };
 
-  constructor(db: Db) {
+  constructor(db: DB) {
     this.db = db;
   }
 
